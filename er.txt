@@ -1,0 +1,31 @@
+@startuml
+entity "Счет" {
+  * id (PK)
+  --
+  * type_id (FK)
+  * client_id (FK)
+  * contract_id (FK)
+  * status
+  * balance
+  * name
+  * created_at
+  * updated_at
+}
+
+entity "ТипСчета" {
+  * id (PK)
+  --
+  * name
+}
+
+entity "Ограничения" {
+  * id (PK)
+  --
+  * account_id (FK)
+  * type
+  * is_active
+}
+
+Счет }|--|| ТипСчета
+Счет ||--o{ Ограничения
+@enduml
