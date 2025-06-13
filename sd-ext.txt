@@ -12,7 +12,9 @@ participant "МС Договора" as Contracts
 App -> Gateway: POST /accounts
 Gateway -> Accounts: Открытие счета
 Accounts -> Clients: Проверить клиента
+Accounts <- Clients: Результат проверки
 Accounts -> Contracts: Проверить договор
+Accounts <- Contracts: Результат проверки
 alt Успешно
   Accounts -> Accounts: Создать счет
   Accounts --> WebSockets: 200 OK
