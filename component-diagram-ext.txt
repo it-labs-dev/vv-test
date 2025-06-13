@@ -1,0 +1,21 @@
+@startuml
+component "Мобильное приложение" as App
+component "CDN" as CDN
+component "API Gateway" as Gateway
+component "WebSockets Server" as WebSockets
+component "Broker" as Broker
+component "Redis" as Redis
+component "МС Счета" as Accounts
+component "МС Клиенты" as Clients
+component "МС Договора" as Contracts
+
+App --> Gateway
+App --> CDN
+App <-- WebSockets
+Gateway --> Broker
+Broker --> Accounts
+Accounts --> WebSockets
+Accounts --> Clients
+Accounts --> Contracts
+Accounts --> Redis
+@enduml
