@@ -10,31 +10,11 @@ participant "МС Договора" as Contracts
 App -> Gateway: POST /accounts
 Gateway -> Accounts: Открытие счета
 Accounts -> Clients: Проверить клиента
+Accounts <- Clients: Результат проверки
 Accounts -> Contracts: Проверить договор
+Accounts <- Contracts: Результат проверки
 alt Успешно
   Accounts -> Accounts: Создать счет
-  Accounts --> Gateway: 200 OK
-else Ошибка
-  Accounts --> Gateway: 400 Bad Request
-end
-Gateway --> App: Ответ
-App --> Клиент: Результат
-@enduml
-@startuml
-actor Клиент
-participant "Мобильное приложение" as App
-participant "API Gateway" as Gateway
-participant "МС Счета" as Accounts
-participant "МС Клиенты" as Clients
-participant "МС Договора" as Contracts
-
-Клиент -> App: Запрос на закрытие счета
-App -> Gateway: POST /accounts/{accountId}/close
-Gateway -> Accounts: Закрытие счета
-Accounts -> Clients: Проверить клиента
-Accounts -> Contracts: Проверить договор
-alt Успешно
-  Accounts -> Accounts: Закрыть счет
   Accounts --> Gateway: 200 OK
 else Ошибка
   Accounts --> Gateway: 400 Bad Request
