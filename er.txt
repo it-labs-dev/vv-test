@@ -1,5 +1,5 @@
 @startuml
-entity "Счет" {
+entity "Accounts" {
   * id (PK)
   --
   * type_id (FK)
@@ -12,13 +12,13 @@ entity "Счет" {
   * updated_at
 }
 
-entity "ТипСчета" {
+entity "AccountTypes" {
   * id (PK)
   --
   * name
 }
 
-entity "Ограничения" {
+entity "AccountRestrictions" {
   * id (PK)
   --
   * account_id (FK)
@@ -26,6 +26,7 @@ entity "Ограничения" {
   * is_active
 }
 
-Счет }|--|| ТипСчета
-Счет ||--o{ Ограничения
+
+Accounts::type_id }o--|| AccountTypes::id
+AccountRestrictions::account_id }o--||Accounts::id
 @enduml
